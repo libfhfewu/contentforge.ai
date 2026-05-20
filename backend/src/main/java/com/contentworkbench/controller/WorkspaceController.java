@@ -30,7 +30,7 @@ public class WorkspaceController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<Workspace> detail(@PathVariable Long id) {
-        return ApiResponse.success(workspaceService.getById(id));
+    public ApiResponse<Workspace> detail(@PathVariable Long id, @RequestAttribute("userId") Long userId) {
+        return ApiResponse.success(workspaceService.getById(id, userId));
     }
 }

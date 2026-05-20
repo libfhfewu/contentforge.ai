@@ -1,6 +1,7 @@
 package com.contentworkbench.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.contentworkbench.model.entity.User;
 import com.contentworkbench.model.entity.Workspace;
@@ -50,14 +51,31 @@ class WorkspaceServiceTest {
     @Test
     void getDetailShouldReturnWorkspace() {
         Workspace created = workspaceService.create(userId, "Detail", "topic");
-        Workspace found = workspaceService.getById(created.getId());
+        Workspace found = workspaceService.getById(created.getId(), userId);
         assertThat(found.getTitle()).isEqualTo("Detail");
     }
 
     @Test
     void getByIdNotFoundShouldThrow() {
         assertThat(org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () ->
-            workspaceService.getById(99999L)
+            workspaceService.getById(99999L, userId)
         ).getMessage()).contains("not found");
+    }
+
+    @Test
+    void getByIdWithWrongUserShouldThrow() {
+        Workspace created = workspaceService.create(userId, "Mine", "topic");
+        // Create another user and try to access as them
+        User otherUser = userService.register("other", "other" + System.currentTimeMillis() + "@test.com", "pass123");
+        assertThrows(IllegalArgumentException.class, () ->
+            workspaceService.getById(created.getId(), otherUser.getId()));
+    }
+
+    @Test
+    void updateStatusWithWrongUserShouldThrow() {
+        Workspace created = workspaceService.create(userId, "Mine", "topic");
+        User otherUser = userService.register("other2", "other2" + System.currentTimeMillis() + "@test.com", "pass123");
+        assertThrows(IllegalArgumentException.class, () ->
+            workspaceService.updateStatus(created.getId(), 3, otherUser.getId()));
     }
 }

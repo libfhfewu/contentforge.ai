@@ -29,14 +29,16 @@ public class WorkspaceService {
         return workspaceRepository.findByUserId(userId);
     }
 
-    public Workspace getById(Long id) {
+    public Workspace getById(Long id, Long userId) {
         Workspace ws = workspaceRepository.selectById(id);
-        if (ws == null) throw new IllegalArgumentException("Workspace not found");
+        if (ws == null || !ws.getUserId().equals(userId)) {
+            throw new IllegalArgumentException("Workspace not found");
+        }
         return ws;
     }
 
-    public void updateStatus(Long id, int status) {
-        Workspace ws = getById(id);
+    public void updateStatus(Long id, int status, Long userId) {
+        Workspace ws = getById(id, userId);
         ws.setStatus(status);
         workspaceRepository.updateById(ws);
     }
