@@ -42,4 +42,11 @@ public class WorkspaceService {
         ws.setStatus(status);
         workspaceRepository.updateById(ws);
     }
+
+    public void updateStatusInternal(Long id, int status) {
+        Workspace ws = workspaceRepository.selectById(id);
+        if (ws == null) throw new IllegalArgumentException("Workspace not found");
+        ws.setStatus(status);
+        workspaceRepository.updateById(ws);
+    }
 }
