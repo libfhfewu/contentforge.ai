@@ -33,6 +33,7 @@ public class DirectApiProvider implements LLMProvider {
 
     @Override
     public String chat(String systemPrompt, String userMessage) {
+        HttpURLConnection conn = null;
         try {
             Map<String, Object> body = Map.of(
                 "model", model,
@@ -42,22 +43,34 @@ public class DirectApiProvider implements LLMProvider {
             );
             String json = mapper.writeValueAsString(body);
 
-            HttpURLConnection conn = (HttpURLConnection) URI.create(apiUrl).toURL().openConnection();
+            conn = (HttpURLConnection) URI.create(apiUrl).toURL().openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("x-api-key", apiKey);
             conn.setRequestProperty("anthropic-version", "2023-06-01");
+            conn.setConnectTimeout(10_000);
+            conn.setReadTimeout(60_000);
             conn.setDoOutput(true);
 
             try (OutputStream os = conn.getOutputStream()) {
                 os.write(json.getBytes(StandardCharsets.UTF_8));
             }
 
+            int status = conn.getResponseCode();
+            if (status >= 400) {
+                String errorBody = new String(conn.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+                throw new RuntimeException("LLM API error " + status + ": " + errorBody);
+            }
+
             String response = new String(conn.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
             var root = mapper.readTree(response);
             return root.path("content").get(0).path("text").asText();
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("LLM API call failed", e);
+        } finally {
+            if (conn != null) conn.disconnect();
         }
     }
 
@@ -79,9 +92,20 @@ public class DirectApiProvider implements LLMProvider {
             conn.setRequestProperty("x-api-key", apiKey);
             conn.setRequestProperty("anthropic-version", "2023-06-01");
             conn.setRequestProperty("Accept", "text/event-stream");
+            conn.setConnectTimeout(10_000);
+            conn.setReadTimeout(300_000);
             conn.setDoOutput(true);
 
-            conn.getOutputStream().write(json.getBytes(StandardCharsets.UTF_8));
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.getBytes(StandardCharsets.UTF_8));
+            }
+
+            int status = conn.getResponseCode();
+            if (status >= 400) {
+                String errorBody = new String(conn.getErrorStream().readAllBytes(), StandardCharsets.UTF_8);
+                conn.disconnect();
+                throw new RuntimeException("LLM API error " + status + ": " + errorBody);
+            }
 
             BufferedReader reader = new BufferedReader(
                 new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
@@ -99,7 +123,12 @@ public class DirectApiProvider implements LLMProvider {
                     } catch (Exception e) { return ""; }
                 })
                 .filter(s -> !s.isEmpty())
-                .onClose(() -> { try { reader.close(); } catch (Exception ignored) {} });
+                .onClose(() -> {
+                    try { reader.close(); } catch (Exception ignored) {}
+                    conn.disconnect();
+                });
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("LLM stream call failed", e);
         }

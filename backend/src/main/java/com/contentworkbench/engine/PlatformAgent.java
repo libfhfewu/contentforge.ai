@@ -3,6 +3,7 @@ package com.contentworkbench.engine;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,16 +18,31 @@ public class PlatformAgent {
     public Map<String, String> execute(String contentJson) {
         Map<String, String> results = new ConcurrentHashMap<>();
 
-        CompletableFuture<Void> wechat = CompletableFuture.runAsync(() ->
-            results.put("wechat", adapt("wechat", contentJson)));
+        CompletableFuture<Void> wechat = CompletableFuture.runAsync(() -> {
+            try {
+                results.put("wechat", adapt("wechat", contentJson));
+            } catch (Exception e) {
+                results.put("wechat", "{\"error\":\"Adaptation failed: " + e.getMessage() + "\"}");
+            }
+        });
 
-        CompletableFuture<Void> xiaohongshu = CompletableFuture.runAsync(() ->
-            results.put("xiaohongshu", adapt("xiaohongshu", contentJson)));
+        CompletableFuture<Void> xiaohongshu = CompletableFuture.runAsync(() -> {
+            try {
+                results.put("xiaohongshu", adapt("xiaohongshu", contentJson));
+            } catch (Exception e) {
+                results.put("xiaohongshu", "{\"error\":\"Adaptation failed: " + e.getMessage() + "\"}");
+            }
+        });
 
-        CompletableFuture<Void> twitter = CompletableFuture.runAsync(() ->
-            results.put("twitter", adapt("twitter", contentJson)));
+        CompletableFuture<Void> twitter = CompletableFuture.runAsync(() -> {
+            try {
+                results.put("twitter", adapt("twitter", contentJson));
+            } catch (Exception e) {
+                results.put("twitter", "{\"error\":\"Adaptation failed: " + e.getMessage() + "\"}");
+            }
+        });
 
-        CompletableFuture.allOf(wechat, xiaohongshu, twitter).join();
+        CompletableFuture.allOf(wechat, xiaohongshu, twitter).orTimeout(60, TimeUnit.SECONDS).join();
         return results;
     }
 
