@@ -9,6 +9,12 @@ spring:
       mode: always
       schema-locations: classpath:db/schema.sql
 
+llm:
+  provider: direct-api
+  api-key: test-api-key
+  api-url: https://api.anthropic.com/v1/messages
+  model: claude-sonnet-4-6
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
