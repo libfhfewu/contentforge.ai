@@ -5,6 +5,7 @@ import com.contentworkbench.model.dto.LoginRequest;
 import com.contentworkbench.model.dto.RegisterRequest;
 import com.contentworkbench.model.entity.User;
 import com.contentworkbench.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -20,16 +21,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ApiResponse<User> register(@Valid @RequestBody RegisterRequest req, HttpSession session) {
+    public ApiResponse<User> register(@Valid @RequestBody RegisterRequest req, HttpServletRequest request) {
         User user = userService.register(req.getUsername(), req.getEmail(), req.getPassword());
-        session.setAttribute("userId", user.getId());
+        request.getSession().invalidate();
+        HttpSession newSession = request.getSession(true);
+        newSession.setAttribute("userId", user.getId());
         return ApiResponse.success(user);
     }
 
     @PostMapping("/login")
-    public ApiResponse<User> login(@Valid @RequestBody LoginRequest req, HttpSession session) {
+    public ApiResponse<User> login(@Valid @RequestBody LoginRequest req, HttpServletRequest request) {
         User user = userService.login(req.getEmail(), req.getPassword());
-        session.setAttribute("userId", user.getId());
+        request.getSession().invalidate();
+        HttpSession newSession = request.getSession(true);
+        newSession.setAttribute("userId", user.getId());
         return ApiResponse.success(user);
     }
 
