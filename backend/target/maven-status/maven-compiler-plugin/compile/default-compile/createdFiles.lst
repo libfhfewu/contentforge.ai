@@ -1,0 +1,3 @@
+com\contentworkbench\ContentWorkbenchApplication.class
+com\contentworkbench\common\GlobalExceptionHandler.class
+com\contentworkbench\common\ApiResponse.class
