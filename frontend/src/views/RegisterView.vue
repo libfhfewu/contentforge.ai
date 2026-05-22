@@ -1,3 +1,4 @@
+<!-- User registration form with username, email, and password. -->
 <template>
   <n-layout class="auth-layout">
     <n-card title="注册" class="auth-card">

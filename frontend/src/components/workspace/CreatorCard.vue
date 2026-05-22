@@ -1,3 +1,4 @@
+<!-- Panel for generating, editing, and confirming AI-written content before platform adaptation. -->
 <template>
   <n-card title="✍️ 内容创作者" size="small">
     <n-spin :show="loading">

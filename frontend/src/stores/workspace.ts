@@ -1,3 +1,6 @@
+/**
+ * Pinia store managing workspace list state and CRUD operations.
+ */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { createWorkspace, listWorkspaces } from '../api/workspace'

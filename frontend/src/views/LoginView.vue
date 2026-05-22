@@ -1,3 +1,4 @@
+<!-- User login form with email and password authentication. -->
 <template>
   <n-layout class="auth-layout">
     <n-card title="登录 AI 内容创作工作台" class="auth-card">

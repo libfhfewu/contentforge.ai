@@ -1,3 +1,4 @@
+<!-- Table view of all past workspace projects with status and quick access links. -->
 <template>
   <AppLayout>
     <n-card title="历史记录">

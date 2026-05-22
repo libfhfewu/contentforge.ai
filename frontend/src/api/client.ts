@@ -1,3 +1,6 @@
+/**
+ * Configured Axios instance with base URL, credentials, and 401 redirect handling.
+ */
 import axios from 'axios'
 
 const client = axios.create({

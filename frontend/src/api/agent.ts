@@ -1,3 +1,6 @@
+/**
+ * Agent pipeline API call wrappers for executing strategy, content, and platform steps.
+ */
 import client from './client'
 
 export function executeStrategy(workspaceId: number, topic: string, audience: string) {

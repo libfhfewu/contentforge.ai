@@ -1,3 +1,6 @@
+/**
+ * Vue Router configuration with route definitions and an authentication guard.
+ */
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({

@@ -1,3 +1,4 @@
+<!-- Multi-step AI content creation pipeline: strategy planning, content writing, and platform adaptation. -->
 <template>
   <AppLayout>
     <div v-if="workspace">

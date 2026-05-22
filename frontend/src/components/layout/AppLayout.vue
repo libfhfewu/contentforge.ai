@@ -1,3 +1,4 @@
+<!-- Page shell combining the app header with a centered, constrained content slot. -->
 <template>
   <n-layout class="app-layout">
     <AppHeader />

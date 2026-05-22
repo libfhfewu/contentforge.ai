@@ -1,3 +1,6 @@
+/**
+ * Shared TypeScript interfaces for User, Workspace, AgentResponse, and ContentVersion.
+ */
 export interface User {
   id: number
   username: string

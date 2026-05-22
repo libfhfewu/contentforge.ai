@@ -1,3 +1,4 @@
+<!-- Side-by-side comparison of content adapted for WeChat, Xiaohongshu, and Twitter. -->
 <template>
   <n-grid cols="3" x-gap="12">
     <n-grid-item v-for="platform in platforms" :key="platform.key">

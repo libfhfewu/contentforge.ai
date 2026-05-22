@@ -1,3 +1,6 @@
+/**
+ * Pinia store managing the multi-step AI agent pipeline state (strategy, content, platform).
+ */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import * as api from '../api/agent'

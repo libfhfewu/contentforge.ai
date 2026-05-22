@@ -1,3 +1,6 @@
+/**
+ * Pinia store managing user authentication state and login/register/logout flows.
+ */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { login as apiLogin, register as apiRegister, logout as apiLogout } from '../api/auth'

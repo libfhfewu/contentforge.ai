@@ -1,3 +1,6 @@
+/**
+ * Login, register, and logout API call wrappers.
+ */
 import client from './client'
 
 export function login(email: string, password: string) {

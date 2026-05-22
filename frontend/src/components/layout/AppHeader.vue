@@ -1,3 +1,4 @@
+<!-- Global navigation header with app title, history link, and logout button. -->
 <template>
   <n-page-header>
     <template #title>

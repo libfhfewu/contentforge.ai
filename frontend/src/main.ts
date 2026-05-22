@@ -1,3 +1,6 @@
+/**
+ * Vue application bootstrap registering Pinia, Vue Router, and Naive UI plugins.
+ */
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import naive from 'naive-ui'

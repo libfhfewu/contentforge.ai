@@ -1,3 +1,4 @@
+<!-- Panel for generating and reviewing AI content strategy plans with confirm/retry actions. -->
 <template>
   <n-card title="🤖 策略规划师" size="small">
     <n-spin :show="loading">

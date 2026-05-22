@@ -1,3 +1,4 @@
+<!-- Dashboard for creating new workspaces and browsing existing ones. -->
 <template>
   <AppLayout>
     <n-space vertical size="large">
