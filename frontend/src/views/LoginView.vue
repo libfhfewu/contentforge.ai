@@ -1,4 +1,4 @@
-<!-- User login form with email and password authentication. -->
+<!-- 登录页：邮箱 + 密码表单，登录后跳转仪表盘 -->
 <template>
   <n-layout class="auth-layout">
     <n-card title="登录 AI 内容创作工作台" class="auth-card">

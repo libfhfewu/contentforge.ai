@@ -1,4 +1,4 @@
-<!-- Root component wrapping the router view inside a Naive UI message provider. -->
+<!-- 根组件：Naive UI 消息提供者 + 路由视图 -->
 <template>
   <n-message-provider>
     <router-view />

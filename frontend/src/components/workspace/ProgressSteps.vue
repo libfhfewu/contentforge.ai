@@ -1,4 +1,4 @@
-<!-- Three-step progress indicator for the AI content pipeline: strategy, content, platform. -->
+<!-- 三步骤进度指示器：策略规划 → 内容创作 → 平台适配 -->
 <template>
   <n-steps :current="step">
     <n-step title="策略规划" description="AI 分析选题策略" />

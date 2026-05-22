@@ -1,4 +1,4 @@
-<!-- Panel for generating, editing, and confirming AI-written content before platform adaptation. -->
+<!-- 内容创作者 Agent 卡片：触发内容生成、内嵌编辑器、确认/重试 -->
 <template>
   <n-card title="✍️ 内容创作者" size="small">
     <n-spin :show="loading">

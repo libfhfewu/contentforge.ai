@@ -1,6 +1,4 @@
-/**
- * Login, register, and logout API call wrappers.
- */
+/** 认证 API：登录、注册、登出 */
 import client from './client'
 
 export function login(email: string, password: string) {

@@ -1,4 +1,4 @@
-<!-- Global navigation header with app title, history link, and logout button. -->
+<!-- 顶部导航栏：Logo、历史记录入口、退出登录 -->
 <template>
   <n-page-header>
     <template #title>

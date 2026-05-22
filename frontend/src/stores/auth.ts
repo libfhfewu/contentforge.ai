@@ -1,6 +1,4 @@
-/**
- * Pinia store managing user authentication state and login/register/logout flows.
- */
+/** 认证状态管理：用户信息、登录/注册/登出操作 */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { login as apiLogin, register as apiRegister, logout as apiLogout } from '../api/auth'

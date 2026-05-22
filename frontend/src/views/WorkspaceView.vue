@@ -1,4 +1,4 @@
-<!-- Multi-step AI content creation pipeline: strategy planning, content writing, and platform adaptation. -->
+<!-- 工作台核心页面：3 步 Agent 交互流程（策略→创作→平台适配） -->
 <template>
   <AppLayout>
     <div v-if="workspace">

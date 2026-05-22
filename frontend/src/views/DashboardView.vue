@@ -1,4 +1,4 @@
-<!-- Dashboard for creating new workspaces and browsing existing ones. -->
+<!-- 仪表盘：新建工作区入口 + 已创建工作区卡片列表 -->
 <template>
   <AppLayout>
     <n-space vertical size="large">

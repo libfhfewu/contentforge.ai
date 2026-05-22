@@ -1,6 +1,4 @@
-/**
- * Workspace CRUD API call wrappers for creating and listing workspaces.
- */
+/** 工作区 API：创建、列表、详情 */
 import client from './client'
 
 export function createWorkspace(title: string, topic: string) {

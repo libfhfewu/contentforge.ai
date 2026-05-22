@@ -1,6 +1,4 @@
-/**
- * Shared TypeScript interfaces for User, Workspace, AgentResponse, and ContentVersion.
- */
+/** 全局 TypeScript 类型定义：User、Workspace、AgentResponse、ContentVersion */
 export interface User {
   id: number
   username: string

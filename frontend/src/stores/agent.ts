@@ -1,6 +1,4 @@
-/**
- * Pinia store managing the multi-step AI agent pipeline state (strategy, content, platform).
- */
+/** Agent 状态管理：3 步流程状态、策略/内容/平台结果、加载态 */
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import * as api from '../api/agent'

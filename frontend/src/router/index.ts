@@ -1,6 +1,4 @@
-/**
- * Vue Router configuration with route definitions and an authentication guard.
- */
+/** Vue Router 配置：5 个路由 + 登录守卫（未登录跳转 /login） */
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({

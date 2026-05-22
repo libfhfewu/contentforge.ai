@@ -1,4 +1,4 @@
-<!-- Editable title and Markdown body fields for refining AI-generated content. -->
+<!-- 内容编辑器：标题 + Markdown 正文实时编辑 -->
 <template>
   <n-card title="编辑内容" size="small">
     <n-form-item label="标题">

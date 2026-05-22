@@ -1,4 +1,4 @@
-<!-- Panel for generating and reviewing AI content strategy plans with confirm/retry actions. -->
+<!-- 策略规划师 Agent 卡片：触发策略生成、展示结果、确认/重试 -->
 <template>
   <n-card title="🤖 策略规划师" size="small">
     <n-spin :show="loading">

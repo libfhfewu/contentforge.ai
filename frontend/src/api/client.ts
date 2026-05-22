@@ -1,6 +1,4 @@
-/**
- * Configured Axios instance with base URL, credentials, and 401 redirect handling.
- */
+/** Axios 实例：baseURL=/api，自动携带 Cookie，401 时跳转登录页 */
 import axios from 'axios'
 
 const client = axios.create({

@@ -1,4 +1,4 @@
-<!-- Side-by-side comparison of content adapted for WeChat, Xiaohongshu, and Twitter. -->
+<!-- 三栏平台对比视图：公众号 | 小红书 | 推特，并排展示各平台适配结果 -->
 <template>
   <n-grid cols="3" x-gap="12">
     <n-grid-item v-for="platform in platforms" :key="platform.key">

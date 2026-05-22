@@ -1,4 +1,4 @@
-<!-- Panel for triggering cross-platform content adaptation and viewing results. -->
+<!-- 平台优化师 Agent 卡片：触发三平台并发适配 -->
 <template>
   <n-card title="📱 平台优化师" size="small">
     <n-spin :show="loading">

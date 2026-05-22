@@ -1,4 +1,4 @@
-<!-- Page shell combining the app header with a centered, constrained content slot. -->
+<!-- 页面布局容器：顶部导航 + 内容区域 -->
 <template>
   <n-layout class="app-layout">
     <AppHeader />

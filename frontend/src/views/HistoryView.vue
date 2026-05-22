@@ -1,4 +1,4 @@
-<!-- Table view of all past workspace projects with status and quick access links. -->
+<!-- 历史记录：展示所有工作区列表，支持跳转查看 -->
 <template>
   <AppLayout>
     <n-card title="历史记录">
