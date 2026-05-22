@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
- * Repository layer: MyBatis mapper for the {@code users} table — provides email and username lookups.
+ * 用户数据访问层，MyBatis-Plus BaseMapper
  */
 @Mapper
 public interface UserRepository extends BaseMapper<User> {

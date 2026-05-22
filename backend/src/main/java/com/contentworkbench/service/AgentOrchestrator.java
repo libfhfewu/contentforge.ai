@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * Service layer: orchestrates the full content pipeline — strategy, creation, and platform adaptation — by
- * coordinating engine agents and persisting results through ContentService.
+ * Agent 编排器，顺序调度 3 个 Agent（策略→创作→平台），管理状态流转
  */
 @Service
 public class AgentOrchestrator {

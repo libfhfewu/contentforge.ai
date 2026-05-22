@@ -3,7 +3,7 @@ package com.contentworkbench.model.dto;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * DTO for capturing login credentials (email and password) from the client.
+ * 登录请求体
  */
 public class LoginRequest {
     @NotBlank

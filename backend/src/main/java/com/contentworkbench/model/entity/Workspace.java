@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
 /**
- * Entity mapped to the {@code workspaces} table — represents a user content project with title, topic, and workflow status.
+ * 工作区实体，映射 workspaces 表
  */
 @TableName("workspaces")
 public class Workspace {

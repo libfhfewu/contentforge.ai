@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 /**
- * Engine layer: concrete LLM provider that calls AI APIs directly over HTTP with JSON request/response handling.
+ * Claude API 直调实现，HttpURLConnection 发送请求、SSE 流式解析
  */
 @Component
 public class DirectApiProvider implements LLMProvider {

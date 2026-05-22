@@ -1,7 +1,7 @@
 package com.contentworkbench.model.dto;
 
 /**
- * DTO for transferring workspace creation and update data between the controller and service layers.
+ * 工作区创建/更新请求体
  */
 public class WorkspaceDTO {
     private Long id;

@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * Service layer: business logic for user registration and login, including password hashing.
+ * 用户业务逻辑，注册（BCrypt 加密 + 邮箱/用户名唯一校验）、登录验证
  */
 @Service
 public class UserService {

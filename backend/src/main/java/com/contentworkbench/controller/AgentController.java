@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Controller layer: REST and SSE endpoints for running AI agents and managing content output within a workspace.
+ * Agent 交互接口，策略/创作/平台适配的触发、SSE 流式输出、输出内容管理
  */
 @RestController
 @RequestMapping("/api/workspaces/{workspaceId}")

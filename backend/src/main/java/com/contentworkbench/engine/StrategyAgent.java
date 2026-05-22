@@ -3,7 +3,7 @@ package com.contentworkbench.engine;
 import org.springframework.stereotype.Component;
 
 /**
- * Engine layer: AI agent that generates a structured content strategy plan (angles, keywords, publish plan) from a topic.
+ * 策略规划 Agent：根据主题和目标受众生成内容策略（选题角度、关键词、结构、发布计划）
  */
 @Component
 public class StrategyAgent {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Service layer: business logic for workspace lifecycle management and status transitions.
+ * 工作区业务逻辑，创建、归属校验、状态流转
  */
 @Service
 public class WorkspaceService {

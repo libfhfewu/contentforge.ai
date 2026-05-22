@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * Repository layer: MyBatis mapper for the {@code workspaces} table — finds workspaces by user.
+ * 工作区数据访问层
  */
 @Mapper
 public interface WorkspaceRepository extends BaseMapper<Workspace> {

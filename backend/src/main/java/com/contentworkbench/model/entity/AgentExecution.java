@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
 /**
- * Entity mapped to the {@code agent_executions} table — audit log recording each AI agent invocation with input and output.
+ * Agent 执行记录实体，映射 agent_executions 表
  */
 @TableName("agent_executions")
 public class AgentExecution {

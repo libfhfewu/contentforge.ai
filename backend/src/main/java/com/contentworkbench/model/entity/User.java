@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 
 /**
- * Entity mapped to the {@code users} table — represents a registered user account with hashed credentials.
+ * 用户实体，映射 users 表
  */
 @TableName("users")
 public class User {

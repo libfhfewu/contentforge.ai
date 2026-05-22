@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * Repository layer: MyBatis mapper for the {@code agent_executions} table — queries execution logs by workspace.
+ * Agent 执行记录数据访问层
  */
 @Mapper
 public interface AgentExecutionRepository extends BaseMapper<AgentExecution> {

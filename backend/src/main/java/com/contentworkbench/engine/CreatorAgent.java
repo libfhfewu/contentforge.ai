@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 import org.springframework.stereotype.Component;
 
 /**
- * Engine layer: AI agent that drafts full content (title, body, tags) from a strategy plan, with streaming support.
+ * 内容创作 Agent：根据策略生成 Markdown 正文（支持同步和 SSE 流式两种模式）
  */
 @Component
 public class CreatorAgent {

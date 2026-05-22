@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
 /**
- * Entity mapped to the {@code content_versions} table — versioned snapshot of generated content for a platform.
+ * 内容版本实体，映射 content_versions 表
  */
 @TableName("content_versions")
 public class ContentVersion {

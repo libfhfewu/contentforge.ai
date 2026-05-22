@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * Common-layer global exception handler that converts application exceptions into standardized
- * {@link ApiResponse} error payloads with appropriate HTTP status codes.
+ * 全局异常处理，IllegalArgumentException → 400，Exception → 500
  */
 @RestControllerAdvice
 public class

@@ -8,8 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Configuration: registers a session-based authentication interceptor that protects all {@code /api/**} endpoints
- * except {@code /api/auth/**}, attaching the authenticated user ID to every request.
+ * 安全配置：注册 AuthInterceptor 拦截 /api/** 路径，校验 Session 登录态
  */
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {

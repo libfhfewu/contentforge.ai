@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * Repository layer: MyBatis mapper for the {@code content_versions} table — queries content snapshots by workspace and platform.
+ * 内容版本数据访问层
  */
 @Mapper
 public interface ContentVersionRepository extends BaseMapper<ContentVersion> {

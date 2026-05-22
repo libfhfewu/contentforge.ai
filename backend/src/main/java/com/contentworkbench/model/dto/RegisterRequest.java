@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * DTO for capturing registration fields (username, email, password) with validation constraints.
+ * 注册请求体
  */
 public class RegisterRequest {
     @NotBlank @Size(min = 2, max = 50)

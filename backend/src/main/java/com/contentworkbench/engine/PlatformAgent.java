@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
 
 /**
- * Engine layer: AI agent that adapts content in parallel for multiple platforms (WeChat, Xiaohongshu, Twitter/X).
+ * 平台适配 Agent：并发调用三平台（公众号/小红书/推特），将内容转换为各平台风格
  */
 @Component
 public class PlatformAgent {
