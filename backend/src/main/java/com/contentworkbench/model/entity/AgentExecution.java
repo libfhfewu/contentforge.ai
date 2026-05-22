@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
+/**
+ * Entity mapped to the {@code agent_executions} table — audit log recording each AI agent invocation with input and output.
+ */
 @TableName("agent_executions")
 public class AgentExecution {
     @TableId(type = IdType.AUTO)

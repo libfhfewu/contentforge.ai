@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
+/**
+ * Entity mapped to the {@code workspaces} table — represents a user content project with title, topic, and workflow status.
+ */
 @TableName("workspaces")
 public class Workspace {
     @TableId(type = IdType.AUTO)

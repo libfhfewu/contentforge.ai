@@ -5,6 +5,9 @@ import com.contentworkbench.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service layer: business logic for user registration and login, including password hashing.
+ */
 @Service
 public class UserService {
 

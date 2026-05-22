@@ -3,6 +3,9 @@ package com.contentworkbench.engine;
 import java.util.stream.Stream;
 import org.springframework.stereotype.Component;
 
+/**
+ * Engine layer: AI agent that drafts full content (title, body, tags) from a strategy plan, with streaming support.
+ */
 @Component
 public class CreatorAgent {
 

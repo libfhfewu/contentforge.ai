@@ -13,6 +13,9 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller layer: REST and SSE endpoints for running AI agents and managing content output within a workspace.
+ */
 @RestController
 @RequestMapping("/api/workspaces/{workspaceId}")
 public class AgentController {

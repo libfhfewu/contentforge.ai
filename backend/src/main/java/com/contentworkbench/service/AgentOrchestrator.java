@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.stream.Stream;
 
+/**
+ * Service layer: orchestrates the full content pipeline — strategy, creation, and platform adaptation — by
+ * coordinating engine agents and persisting results through ContentService.
+ */
 @Service
 public class AgentOrchestrator {
 

@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.time.LocalDateTime;
 
+/**
+ * Entity mapped to the {@code content_versions} table — versioned snapshot of generated content for a platform.
+ */
 @TableName("content_versions")
 public class ContentVersion {
     @TableId(type = IdType.AUTO)

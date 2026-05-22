@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
+/**
+ * Repository layer: MyBatis mapper for the {@code content_versions} table — queries content snapshots by workspace and platform.
+ */
 @Mapper
 public interface ContentVersionRepository extends BaseMapper<ContentVersion> {
     @Select("SELECT * FROM content_versions WHERE workspace_id = #{wsId} AND platform = #{platform} ORDER BY version DESC")

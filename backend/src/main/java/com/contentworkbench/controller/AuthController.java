@@ -10,6 +10,9 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller layer: REST endpoints for user authentication — register, login, and logout.
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

@@ -6,6 +6,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Component;
 
+/**
+ * Engine layer: AI agent that adapts content in parallel for multiple platforms (WeChat, Xiaohongshu, Twitter/X).
+ */
 @Component
 public class PlatformAgent {
 

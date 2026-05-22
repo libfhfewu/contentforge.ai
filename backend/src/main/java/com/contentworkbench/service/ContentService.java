@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer: persistence logic for agent execution logs and versioned content snapshots.
+ */
 @Service
 public class ContentService {
 

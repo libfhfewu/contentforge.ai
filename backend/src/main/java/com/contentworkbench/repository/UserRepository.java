@@ -5,6 +5,9 @@ import com.contentworkbench.model.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+/**
+ * Repository layer: MyBatis mapper for the {@code users} table — provides email and username lookups.
+ */
 @Mapper
 public interface UserRepository extends BaseMapper<User> {
     @Select("SELECT * FROM users WHERE email = #{email}")

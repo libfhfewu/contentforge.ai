@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller layer: REST endpoints for workspace CRUD — create, list, and retrieve workspaces.
+ */
 @RestController
 @RequestMapping("/api/workspaces")
 public class WorkspaceController {

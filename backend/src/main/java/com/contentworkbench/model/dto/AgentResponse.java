@@ -1,5 +1,8 @@
 package com.contentworkbench.model.dto;
 
+/**
+ * DTO for returning agent execution results — role, output payload, token count, and duration.
+ */
 public class AgentResponse {
     private String agentRole;
     private String input;

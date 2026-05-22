@@ -1,5 +1,9 @@
 package com.contentworkbench.common;
 
+/**
+ * Common-layer generic API response wrapper providing a uniform {@code {code, message, data}} JSON envelope
+ * for all controller endpoints.
+ */
 public class ApiResponse<T> {
     private int code;
     private String message;

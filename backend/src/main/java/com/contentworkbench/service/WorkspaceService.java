@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service layer: business logic for workspace lifecycle management and status transitions.
+ */
 @Service
 public class WorkspaceService {
 
