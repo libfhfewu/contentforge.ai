@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { createWorkspace, listWorkspaces } from '../api/workspace'
-import type { Workspace } from '../types'
+import type { Workspace, ApiResponse } from '../types'
 
 export const useWorkspaceStore = defineStore('workspace', () => {
   const workspaces = ref<Workspace[]>([])
@@ -12,7 +12,7 @@ export const useWorkspaceStore = defineStore('workspace', () => {
     loading.value = true
     try {
       const res = await listWorkspaces()
-      workspaces.value = res.data.data
+      workspaces.value = (res.data as ApiResponse<Workspace[]>).data
     } finally {
       loading.value = false
     }
@@ -20,8 +20,9 @@ export const useWorkspaceStore = defineStore('workspace', () => {
 
   async function create(title: string, topic: string) {
     const res = await createWorkspace(title, topic)
-    workspaces.value.unshift(res.data.data)
-    return res.data.data as Workspace
+    const workspace = (res.data as ApiResponse<Workspace>).data
+    workspaces.value.unshift(workspace)
+    return workspace
   }
 
   return { workspaces, loading, fetchAll, create }

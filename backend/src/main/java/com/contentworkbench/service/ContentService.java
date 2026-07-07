@@ -2,8 +2,12 @@ package com.contentworkbench.service;
 
 import com.contentworkbench.model.entity.AgentExecution;
 import com.contentworkbench.model.entity.ContentVersion;
+import com.contentworkbench.model.entity.Workspace;
 import com.contentworkbench.repository.AgentExecutionRepository;
 import com.contentworkbench.repository.ContentVersionRepository;
+import com.contentworkbench.repository.WorkspaceRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +18,17 @@ import java.util.List;
 @Service
 public class ContentService {
 
+    private static final Logger log = LoggerFactory.getLogger(ContentService.class);
+
     private final ContentVersionRepository cvRepo;
     private final AgentExecutionRepository aeRepo;
+    private final WorkspaceRepository workspaceRepository;
 
-    public ContentService(ContentVersionRepository cvRepo, AgentExecutionRepository aeRepo) {
+    public ContentService(ContentVersionRepository cvRepo, AgentExecutionRepository aeRepo,
+                          WorkspaceRepository workspaceRepository) {
         this.cvRepo = cvRepo;
         this.aeRepo = aeRepo;
+        this.workspaceRepository = workspaceRepository;
     }
 
     public AgentExecution logExecution(Long workspaceId, String role, String input, String output,
@@ -32,6 +41,7 @@ public class ContentService {
         ae.setPlatform(platform);
         ae.setTokensUsed(tokens);
         aeRepo.insert(ae);
+        log.info("记录Agent执行日志: workspaceId={}, role={}", workspaceId, role);
         return ae;
     }
 
@@ -46,6 +56,7 @@ public class ContentService {
         cv.setVersion(versionNum);
         cv.setIsUserEdited(0);
         cvRepo.insert(cv);
+        log.info("保存内容版本: workspaceId={}, title={}, platform={}", workspaceId, title, platform);
         return cv;
     }
 
@@ -53,13 +64,23 @@ public class ContentService {
         return cvRepo.findByWorkspaceId(workspaceId);
     }
 
-    public ContentVersion updateVersion(Long versionId, String title, String body) {
+    /**
+     * 更新内容版本（带所有权校验）
+     */
+    public ContentVersion updateVersion(Long versionId, String title, String body, Long workspaceId) {
         ContentVersion cv = cvRepo.selectById(versionId);
-        if (cv == null) throw new IllegalArgumentException("Version not found");
+        if (cv == null) throw new IllegalArgumentException("版本不存在");
+
+        // 校验版本属于指定的工作区
+        if (!cv.getWorkspaceId().equals(workspaceId)) {
+            throw new IllegalArgumentException("版本不属于该工作区");
+        }
+
         cv.setTitle(title);
         cv.setBody(body);
         cv.setIsUserEdited(1);
         cvRepo.updateById(cv);
+        log.info("更新内容版本: versionId={}, workspaceId={}", versionId, workspaceId);
         return cv;
     }
 

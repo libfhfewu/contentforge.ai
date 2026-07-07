@@ -1,15 +1,70 @@
-server:
-  port: 8080
-
 spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
   datasource:
-    url: jdbc:mysql://localhost:3306/content_workbench?useUnicode=true&characterEncoding=utf-8
-    username: root
+    url: ${DB_URL:jdbc:mysql://localhost:3306/content_workbench?useUnicode=true&characterEncoding=utf-8}
+    username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:root}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:10}
+      minimum-idle: ${DB_POOL_MIN_IDLE:5}
+      connection-timeout: ${DB_POOL_TIMEOUT:30000}
+      idle-timeout: ${DB_POOL_IDLE_TIMEOUT:600000}
   data:
     redis:
-      host: localhost
-      port: 6379
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: ${REDIS_TIMEOUT:5000}
+  ai:
+    openai:
+      timeout: 120000
+      api-key: ${LLM_API_KEY:please-set-LLM_API_KEY}
+      base-url: ${LLM_API_URL:https://api.xiaomimimo.com}
+      chat:
+        options:
+          model: ${LLM_MODEL:mimo-v2.5-pro}
+          temperature: 0.7
+          max-tokens: 4096
+    retry:
+      max-attempts: 3
+      backoff:
+        initial-interval: 2000
+        max-interval: 10000
+        multiplier: 2
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    virtual-host: ${RABBITMQ_VHOST:/}
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 3
+        max-concurrency: 10
+        retry:
+          enabled: true
+          initial-interval: 3000
+          max-attempts: 3
+          max-interval: 10000
+          multiplier: 2.0
+
+server:
+  port: ${SERVER_PORT:8080}
+  tomcat:
+    max-http-form-post-size: 10MB
+    max-swallow-size: 10MB
+    max-http-header-size: 64KB
+  max-http-header-size: 64KB
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        secure: ${SESSION_COOKIE_SECURE:true}
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
 
 mybatis-plus:
   configuration:
@@ -19,7 +74,36 @@ mybatis-plus:
       id-type: auto
 
 llm:
-  provider: direct-api
-  api-key: ${LLM_API_KEY}
-  api-url: https://api.anthropic.com/v1/messages
-  model: claude-sonnet-4-6
+  provider: ${LLM_PROVIDER:spring-ai}
+  api-key: ${LLM_API_KEY:please-set-LLM_API_KEY}
+  api-url: ${LLM_API_URL:https://api.xiaomimimo.com/v1}
+  api-format: ${LLM_API_FORMAT:openai}
+  model: ${LLM_MODEL:mimo-v2.5-pro}
+  embedding:
+    enabled: ${LLM_EMBEDDING_ENABLED:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when_authorized
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: content-workbench
+
+logging:
+  level:
+    org.springframework.ai: ${LOG_LEVEL_AI:INFO}
+    com.contentworkbench: ${LOG_LEVEL_APP:INFO}
+    org.springframework.amqp: ${LOG_LEVEL_AMQP:INFO}

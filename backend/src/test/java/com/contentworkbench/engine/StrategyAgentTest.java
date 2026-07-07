@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class StrategyAgentTest {
 
+    @Mock private SpringAiLLMService springAiLLMService;
     @Mock private LLMProvider llmProvider;
     @InjectMocks private StrategyAgent strategyAgent;
 
@@ -25,7 +26,7 @@ class StrategyAgentTest {
           "publishPlan": ["预热:06-15", "爆发:06-18"]
         }
         """;
-        when(llmProvider.chat(org.mockito.ArgumentMatchers.anyString(), org.mockito.ArgumentMatchers.anyString()))
+        when(springAiLLMService.chat(org.mockito.ArgumentMatchers.anyString(), org.mockito.ArgumentMatchers.anyString()))
             .thenReturn(mockResponse);
 
         String result = strategyAgent.execute("618促销", "数码爱好者");

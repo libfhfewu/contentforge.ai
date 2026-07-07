@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class PlatformAgentTest {
 
+    @Mock private SpringAiLLMService springAiLLMService;
     @Mock private LLMProvider llmProvider;
     @InjectMocks private PlatformAgent platformAgent;
 
@@ -22,20 +23,20 @@ class PlatformAgentTest {
     void shouldAdaptToAllThreePlatforms() {
         String wechatJson = "{\"title\":\"WX标题\",\"body\":\"WX正文\",\"coverSuggestion\":\"科技风\"}";
         String xhsJson = "{\"title\":\"XHS标题\",\"body\":\"XHS正文\",\"hashtags\":[\"#数码\"]}";
-        String twitterJson = "{\"thread\":[\"tweet1\",\"tweet2\"]}";
+        String douyinJson = "{\"title\":\"DY标题\",\"hook\":\"前3秒\",\"script\":\"视频脚本\",\"hashtags\":[\"#热门\"],\"duration\":\"30秒\"}";
 
-        when(llmProvider.chat(argThat(ps -> ps != null && ps.contains("WeChat Official Account")), anyString()))
+        when(springAiLLMService.chat(argThat(ps -> ps != null && ps.contains("WeChat Official Account")), anyString()))
             .thenReturn(wechatJson);
-        when(llmProvider.chat(argThat(ps -> ps != null && ps.contains("Xiaohongshu")), anyString()))
+        when(springAiLLMService.chat(argThat(ps -> ps != null && ps.contains("Xiaohongshu")), anyString()))
             .thenReturn(xhsJson);
-        when(llmProvider.chat(argThat(ps -> ps != null && ps.contains("Twitter/X content creator")), anyString()))
-            .thenReturn(twitterJson);
+        when(springAiLLMService.chat(argThat(ps -> ps != null && ps.contains("抖音")), anyString()))
+            .thenReturn(douyinJson);
 
         Map<String, String> results = platformAgent.execute("content text");
 
-        assertThat(results).containsKeys("wechat", "xiaohongshu", "twitter");
+        assertThat(results).containsKeys("wechat", "xiaohongshu", "douyin");
         assertThat(results.get("wechat")).contains("WX标题");
         assertThat(results.get("xiaohongshu")).contains("#数码");
-        assertThat(results.get("twitter")).contains("tweet1");
+        assertThat(results.get("douyin")).contains("DY标题");
     }
 }

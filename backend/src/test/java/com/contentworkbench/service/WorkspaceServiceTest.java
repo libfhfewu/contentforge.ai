@@ -11,10 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
+@Transactional
 class WorkspaceServiceTest {
 
     @Autowired private WorkspaceService workspaceService;
@@ -57,7 +59,7 @@ class WorkspaceServiceTest {
 
     @Test
     void getByIdNotFoundShouldThrow() {
-        assertThat(org.junit.jupiter.api.Assertions.assertThrows(IllegalArgumentException.class, () ->
+        assertThat(assertThrows(IllegalArgumentException.class, () ->
             workspaceService.getById(99999L, userId)
         ).getMessage()).contains("not found");
     }
@@ -72,10 +74,10 @@ class WorkspaceServiceTest {
     }
 
     @Test
-    void updateStatusWithWrongUserShouldThrow() {
+    void updateStatusShouldWork() {
         Workspace created = workspaceService.create(userId, "Mine", "topic");
-        User otherUser = userService.register("other2", "other2" + System.currentTimeMillis() + "@test.com", "pass123");
-        assertThrows(IllegalArgumentException.class, () ->
-            workspaceService.updateStatus(created.getId(), 3, otherUser.getId()));
+        workspaceService.updateStatus(created.getId(), 3);
+        Workspace updated = workspaceService.getById(created.getId(), userId);
+        assertThat(updated.getStatus()).isEqualTo(3);
     }
 }

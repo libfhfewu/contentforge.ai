@@ -4,6 +4,7 @@ import com.contentworkbench.common.ApiResponse;
 import com.contentworkbench.model.dto.WorkspaceDTO;
 import com.contentworkbench.model.entity.Workspace;
 import com.contentworkbench.service.WorkspaceService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class WorkspaceController {
     }
 
     @PostMapping
-    public ApiResponse<Workspace> create(@RequestBody WorkspaceDTO dto, @RequestAttribute("userId") Long userId) {
+    public ApiResponse<Workspace> create(@Valid @RequestBody WorkspaceDTO dto,
+                                          @RequestAttribute("userId") Long userId) {
         Workspace ws = workspaceService.create(userId, dto.getTitle(), dto.getTopic());
         return ApiResponse.success(ws);
     }
@@ -35,5 +37,11 @@ public class WorkspaceController {
     @GetMapping("/{id}")
     public ApiResponse<Workspace> detail(@PathVariable Long id, @RequestAttribute("userId") Long userId) {
         return ApiResponse.success(workspaceService.getById(id, userId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<Void> delete(@PathVariable Long id, @RequestAttribute("userId") Long userId) {
+        workspaceService.delete(id, userId);
+        return ApiResponse.success(null);
     }
 }
